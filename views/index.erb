@@ -1,0 +1,16 @@
+<h2> Posts list </h2>
+
+<% @posts.each do |post|%>
+  <p>
+    <%= post.content %>
+    <a href="/author/<%=post.author_id%>"> <%= @authors.find(post.author_id).name %> </a>
+  </p>
+  <p>
+    <% @comments.each do |comment|%>
+        <%= comment['content']%>
+        <br />
+        <span style="font-size: 75%; color: #999"><%= @authors.find(comment.author_id).name %></span>
+        <hr />
+    <% end %>
+  </p>
+<% end %>

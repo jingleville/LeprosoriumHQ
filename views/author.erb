@@ -1,0 +1,29 @@
+<h2> Posts by <%= @author%> </h2>
+
+<% @posts.each do |post|%>
+  <% @comments = post.comments%>
+  <p>
+    <%= post.content %>
+    <a href="/author/<%=post.author_id%>"> <%= @authors.find(post.author_id).name %> </a>
+  </p>
+  <p>
+    <% @comments.each do |comment|%>
+        <%= comment['content']%>
+        <br />
+        <span style="font-size: 75%; color: #999"><%= @authors.find(comment.author_id).name %></span>
+        <hr />
+    <% end %>
+  </p>
+
+  <br />
+    <p>
+      <form action="/author/<%=post.author_id%>" method="POST">
+        <textarea name="comment" class="form-control" rows="1" placeholder="Type your comment here"></textarea>
+        <br/>
+        <textarea name="author" class="form-control" rows="1" placeholder="Who are you?"></textarea>
+        <br/>
+        <textarea name="post_id" rows="1" cols="10" value = "<%= post.id%>" hidden> <%= post.id%> </textarea>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </p>
+<% end %>
